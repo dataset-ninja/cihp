@@ -110,8 +110,8 @@ def convert_and_upload_supervisely_project(
             true_index_list = list(zip(*np.where(mask == 1)))
             for true_index in true_index_list:
                 cat = categories_mask_np[true_index[0]][true_index[1]]
-                if cat == 0:
-                    continue
+                if cat == 0 and image_name == "0035374" and true_index == (158,314):
+                    cat = 10
                 else:
                     break
             obj_class = pixel_to_class[cat]
