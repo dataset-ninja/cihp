@@ -1,6 +1,6 @@
 Dataset **CIHP** can be downloaded in [Supervisely format](https://developer.supervisely.com/api-references/supervisely-annotation-json-format):
 
- [Download](Set 'HIDE_DATASET=False' to generate download link)
+ [Download](https://assets.supervisely.com/supervisely-supervisely-assets-public/teams_storage/u/t/7z/wDViVqiefgQ3hW6MdC32iKcEt4hdiZyon4EOgbmmyFUUJkPG009f4pRd4e0Zxlvgjo1VvFcwKr7lFmEeSzoXnWP0xLffBmS7krCx070ZQ0l2zYaqc6RPzv4kEKrG.tar)
 
 As an alternative, it can be downloaded with *dataset-tools* package:
 ``` bash
