@@ -1,8 +1,8 @@
-**Crowd Instance-level Human Parsing** is a dataset for instance segmentation, semantic segmentation, and object detection tasks. It is used in the surveillance industry. 
+**CIHP: Crowd Instance-level Human Parsing** is a dataset for instance segmentation, semantic segmentation, and object detection tasks. It is used in the surveillance industry. 
 
 The dataset consists of 38280 images with 768446 labeled objects belonging to 19 different classes including *face*, *hair*, *torso_skin*, and other: *upperclothes*, *right_arm*, *left_arm*, *pants*, *coat*, *left_shoe*, *right_shoe*, *right_leg*, *left_leg*, *hat*, *dress*, *socks*, *sunglasses*, *skirt*, *scarf*, and *glove*.
 
-Images in the CIHP dataset have pixel-level instance segmentation annotations. Due to the nature of the instance segmentation task, it can be automatically transformed into a semantic segmentation (only one mask for every class) or object detection (bounding boxes for every object) tasks. There are 5000 (13% of the total) unlabeled images (i.e. without annotations). There are 3 splits in the dataset: *testing* (5000 images), *training* (28280 images), and *validation* (5000 images). The dataset was released in 2018 by the Sun Yat-sen University, SenseTime Group(Limited), and CVTE Research.
+Images in the CIHP dataset have pixel-level instance segmentation annotations. Due to the nature of the instance segmentation task, it can be automatically transformed into a semantic segmentation (only one mask for every class) or object detection (bounding boxes for every object) tasks. There are 5000 (13% of the total) unlabeled images (i.e. without annotations). There are 3 splits in the dataset: *testing* (5000 images), *training* (28280 images), and *validation* (5000 images). The dataset was released in 2018 by the Sun Yat-sen University, SenseTime Group (Limited), and CVTE Research.
 
 Here are the visualized examples for each of the 19 classes:
 

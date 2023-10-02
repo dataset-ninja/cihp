@@ -1,1 +1,1 @@
-Crowd Instance-level Human Parsing is under [MIT](https://spdx.org/licenses/MIT.html) license.
+CIHP: Crowd Instance-level Human Parsing is under [MIT](https://spdx.org/licenses/MIT.html) license.
