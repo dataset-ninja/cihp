@@ -8,6 +8,7 @@ from supervisely.io.fs import get_file_name, dir_exists
 
 from tqdm import tqdm
 
+
 def download_dataset(teamfiles_dir: str) -> str:
     """Use it for large datasets to convert them on the instance"""
     api = sly.Api.from_env()
@@ -29,7 +30,7 @@ def download_dataset(teamfiles_dir: str) -> str:
             total=fsize,
             unit="B",
             unit_scale=True,
-        ) as pbar:        
+        ) as pbar:
             api.file.download(team_id, teamfiles_path, local_path, progress_cb=pbar)
         dataset_path = unpack_if_archive(local_path)
 
@@ -46,7 +47,9 @@ def download_dataset(teamfiles_dir: str) -> str:
                     unit="B",
                     unit_scale=True,
                 ) as pbar:
-                    api.file.download(team_id, teamfiles_path, local_path, progress_cb=pbar)
+                    api.file.download(
+                        team_id, teamfiles_path, local_path, progress_cb=pbar
+                    )
 
                 sly.logger.info(f"Start unpacking archive '{file_name_with_ext}'...")
                 unpack_if_archive(local_path)
@@ -57,7 +60,8 @@ def download_dataset(teamfiles_dir: str) -> str:
 
         dataset_path = storage_dir
     return dataset_path
-    
+
+
 def count_files(path, extension):
     count = 0
     for root, dirs, files in os.walk(path):
@@ -65,12 +69,15 @@ def count_files(path, extension):
             if file.endswith(extension):
                 count += 1
     return count
-    
+
+
 def convert_and_upload_supervisely_project(
     api: sly.Api, workspace_id: int, project_name: str
 ) -> sly.ProjectInfo:
     ### Function should read local dataset and upload it to Supervisely project, then return project info.###
-    dataset_path = "CCIHP_icip\instance-level_human_parsing\instance-level_human_parsing"
+    dataset_path = (
+        "CCIHP_icip\instance-level_human_parsing\instance-level_human_parsing"
+    )
 
     images_folder = "Images"
     humans_folder = "Human_ids"
@@ -79,20 +86,20 @@ def convert_and_upload_supervisely_project(
     batch_size = 50
     masks_ext = ".png"
 
-
     def get_unique_colors(img):
         unique_colors = []
         img = img.astype(np.int32)
         h, w = img.shape[:2]
         colhash = img[:, :, 0] * 256 * 256 + img[:, :, 1] * 256 + img[:, :, 2]
-        unq, unq_inv, unq_cnt = np.unique(colhash, return_inverse=True, return_counts=True)
+        unq, unq_inv, unq_cnt = np.unique(
+            colhash, return_inverse=True, return_counts=True
+        )
         indxs = np.split(np.argsort(unq_inv), np.cumsum(unq_cnt[:-1]))
         col2indx = {unq[i]: indxs[i][0] for i in range(len(unq))}
         for col, indx in col2indx.items():
             if col != 0:
                 unique_colors.append((col // (256**2), (col // 256) % 256, col % 256))
         return unique_colors
-
 
     def create_ann(image_path):
         labels = []
@@ -110,7 +117,9 @@ def convert_and_upload_supervisely_project(
             true_index_list = list(zip(*np.where(mask == 1)))
             for true_index in true_index_list:
                 cat = categories_mask_np[true_index[0]][true_index[1]]
-                if cat == 0 and image_name == "0035374" and true_index == (158,314):
+                if (
+                    cat == 0 and image_name == "0035374" and true_index == (158, 314)
+                ):  # bad mask case
                     cat = 10
                 else:
                     break
@@ -119,7 +128,6 @@ def convert_and_upload_supervisely_project(
             curr_label = sly.Label(curr_bitmap, obj_class)
             labels.append(curr_label)
         return sly.Annotation(img_size=(img_height, img_wight), labels=labels)
-
 
     hat = sly.ObjClass("hat", sly.Bitmap)
     hair = sly.ObjClass("hair", sly.Bitmap)
@@ -163,7 +171,9 @@ def convert_and_upload_supervisely_project(
         19: right_shoe,
     }
 
-    project = api.project.create(workspace_id, project_name, change_name_if_conflict=True)
+    project = api.project.create(
+        workspace_id, project_name, change_name_if_conflict=True
+    )
     meta = sly.ProjectMeta(
         obj_classes=[
             hat,
@@ -197,22 +207,31 @@ def convert_and_upload_supervisely_project(
             categories_path = os.path.join(ds_path, categories_folder)
             instances_path = os.path.join(ds_path, instances_folder)
 
-            dataset = api.dataset.create(project.id, ds_name.lower(), change_name_if_conflict=True)
+            dataset = api.dataset.create(
+                project.id, ds_name.lower(), change_name_if_conflict=True
+            )
 
             images_names = os.listdir(images_path)
 
-            progress = sly.Progress("Create dataset {}".format(ds_name), len(images_names))
+            progress = sly.Progress(
+                "Create dataset {}".format(ds_name), len(images_names)
+            )
 
             for img_names_batch in sly.batched(images_names, batch_size=batch_size):
                 images_pathes_batch = [
-                    os.path.join(images_path, image_name) for image_name in img_names_batch
+                    os.path.join(images_path, image_name)
+                    for image_name in img_names_batch
                 ]
 
-                img_infos = api.image.upload_paths(dataset.id, img_names_batch, images_pathes_batch)
+                img_infos = api.image.upload_paths(
+                    dataset.id, img_names_batch, images_pathes_batch
+                )
                 img_ids = [im_info.id for im_info in img_infos]
 
                 if ds_name != "Testing":
-                    anns_batch = [create_ann(image_path) for image_path in images_pathes_batch]
+                    anns_batch = [
+                        create_ann(image_path) for image_path in images_pathes_batch
+                    ]
                     api.annotation.upload_anns(img_ids, anns_batch)
 
                 progress.iters_done_report(len(img_names_batch))

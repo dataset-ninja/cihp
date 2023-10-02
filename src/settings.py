@@ -24,7 +24,11 @@ LICENSE: License = License.MIT()
 APPLICATIONS: List[Union[Industry, Domain, Research]] = [Industry.Surveillance()]
 CATEGORY: Category = Category.Surveillance()
 
-CV_TASKS: List[CVTask] = [CVTask.InstanceSegmentation(), CVTask.SemanticSegmentation(), CVTask.ObjectDetection()]
+CV_TASKS: List[CVTask] = [
+    CVTask.InstanceSegmentation(),
+    CVTask.SemanticSegmentation(),
+    CVTask.ObjectDetection(),
+]
 ANNOTATION_TYPES: List[AnnotationType] = [AnnotationType.InstanceSegmentation()]
 
 RELEASE_DATE: Optional[str] = "2018-08-01"  # e.g. "YYYY-MM-DD"
@@ -51,15 +55,34 @@ CLASS2COLOR: Optional[Dict[str, List[str]]] = None
 
 # If you have more than the one paper, put the most relatable link as the first element of the list
 # Use dict key to specify name for a button
-PAPER: Optional[Union[str, List[str], Dict[str, str]]] = "https://arxiv.org/abs/1808.00157"
+PAPER: Optional[
+    Union[str, List[str], Dict[str, str]]
+] = "https://arxiv.org/abs/1808.00157"
 BLOGPOST: Optional[Union[str, List[str], Dict[str, str]]] = None
-REPOSITORY: Optional[Union[str, List[str], Dict[str, str]]] = "https://github.com/Engineering-Course/CIHP_PGN"
+REPOSITORY: Optional[
+    Union[str, List[str], Dict[str, str]]
+] = "https://github.com/Engineering-Course/CIHP_PGN"
 
 CITATION_URL: Optional[str] = "https://arxiv.org/abs/1808.00157"
-AUTHORS: Optional[List[str]] = ["Ke Gong", "Xiaodan Liang", "Yicheng Li", "Yimin Chen", "Ming Yang", "Liang Lin"]
+AUTHORS: Optional[List[str]] = [
+    "Ke Gong",
+    "Xiaodan Liang",
+    "Yicheng Li",
+    "Yimin Chen",
+    "Ming Yang",
+    "Liang Lin",
+]
 
-ORGANIZATION_NAME: Optional[Union[str, List[str]]] = ["Sun Yat-sen University", "SenseTime Group(Limited)", "CVTE Research"]
-ORGANIZATION_URL: Optional[Union[str, List[str]]] = ["https://www.sysu.edu.cn/sysuen/","https://www.sensetime.com/en", "https://research.cvte.com/?locale=en-US"]
+ORGANIZATION_NAME: Optional[Union[str, List[str]]] = [
+    "Sun Yat-sen University",
+    "SenseTime Group(Limited)",
+    "CVTE Research",
+]
+ORGANIZATION_URL: Optional[Union[str, List[str]]] = [
+    "https://www.sysu.edu.cn/sysuen/",
+    "https://www.sensetime.com/en",
+    "https://research.cvte.com/?locale=en-US",
+]
 
 # Set '__PRETEXT__' or '__POSTTEXT__' as a key with string value to add custom text. e.g. SLYTAGSPLIT = {'__POSTTEXT__':'some text}
 SLYTAGSPLIT: Optional[Dict[str, Union[List[str], str]]] = None
@@ -76,7 +99,9 @@ SECTION_EXPLORE_CUSTOM_DATASETS: Optional[List[str]] = None
 def check_names():
     fields_before_upload = [PROJECT_NAME]  # PROJECT_NAME_FULL
     if any([field is None for field in fields_before_upload]):
-        raise ValueError("Please fill all fields in settings.py before uploading to instance.")
+        raise ValueError(
+            "Please fill all fields in settings.py before uploading to instance."
+        )
 
 
 def get_settings():
@@ -100,7 +125,9 @@ def get_settings():
     }
 
     if any([field is None for field in settings.values()]):
-        raise ValueError("Please fill all fields in settings.py after uploading to instance.")
+        raise ValueError(
+            "Please fill all fields in settings.py after uploading to instance."
+        )
 
     settings["release_date"] = RELEASE_DATE
     settings["download_original_url"] = DOWNLOAD_ORIGINAL_URL
