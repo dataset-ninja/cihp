@@ -14,7 +14,7 @@ from dataset_tools.templates import (
 # * Before uploading to instance #
 ##################################
 PROJECT_NAME: str = "CIHP"
-PROJECT_NAME_FULL: str = "Crowd Instance-level Human Parsing"
+PROJECT_NAME_FULL: str = "CIHP: Crowd Instance-level Human Parsing"
 HIDE_DATASET = True  # set False when 100% sure about repo quality
 
 ##################################
@@ -75,7 +75,7 @@ AUTHORS: Optional[List[str]] = [
 
 ORGANIZATION_NAME: Optional[Union[str, List[str]]] = [
     "Sun Yat-sen University",
-    "SenseTime Group(Limited)",
+    "SenseTime Group (Limited)",
     "CVTE Research",
 ]
 ORGANIZATION_URL: Optional[Union[str, List[str]]] = [
