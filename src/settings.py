@@ -35,7 +35,7 @@ RELEASE_DATE: Optional[str] = "2018-08-01"  # e.g. "YYYY-MM-DD"
 if RELEASE_DATE is None:
     RELEASE_YEAR: int = None
 
-HOMEPAGE_URL: str = "https://sysu-hcp.net/lip/"
+HOMEPAGE_URL: str = "https://github.com/Engineering-Course/CIHP_PGN"
 # e.g. "https://some.com/dataset/homepage"
 
 PREVIEW_IMAGE_ID: int = 5448956
@@ -61,7 +61,7 @@ PAPER: Optional[
 BLOGPOST: Optional[Union[str, List[str], Dict[str, str]]] = None
 REPOSITORY: Optional[
     Union[str, List[str], Dict[str, str]]
-] = "https://github.com/Engineering-Course/CIHP_PGN"
+] = None #{"GitHub": "https://github.com/Engineering-Course/CIHP_PGN"}
 
 CITATION_URL: Optional[str] = "https://arxiv.org/abs/1808.00157"
 AUTHORS: Optional[List[str]] = [
