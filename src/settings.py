@@ -61,7 +61,7 @@ PAPER: Optional[
 BLOGPOST: Optional[Union[str, List[str], Dict[str, str]]] = None
 REPOSITORY: Optional[
     Union[str, List[str], Dict[str, str]]
-] = None #{"GitHub": "https://github.com/Engineering-Course/CIHP_PGN"}
+] = None
 
 CITATION_URL: Optional[str] = "https://arxiv.org/abs/1808.00157"
 AUTHORS: Optional[List[str]] = [
@@ -72,6 +72,7 @@ AUTHORS: Optional[List[str]] = [
     "Ming Yang",
     "Liang Lin",
 ]
+AUTHORS_CONTACTS: Optional[List[str]] = ["xdliang328@gmail.com"]
 
 ORGANIZATION_NAME: Optional[Union[str, List[str]]] = [
     "Sun Yat-sen University",
@@ -137,6 +138,7 @@ def get_settings():
     settings["repository"] = REPOSITORY
     settings["citation_url"] = CITATION_URL
     settings["authors"] = AUTHORS
+    settings["authors_contacts"] = AUTHORS_CONTACTS
     settings["organization_name"] = ORGANIZATION_NAME
     settings["organization_url"] = ORGANIZATION_URL
     settings["slytagsplit"] = SLYTAGSPLIT
